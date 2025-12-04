@@ -12,6 +12,7 @@ function getHumanChoice() {
     } else if (huIN === 'scissors') {
         return 'Scissors';
     } else {
+        console.log('Going to need a Rock, Paper, or Scissors big dog.')
         return undefined;
     }
 }
@@ -21,58 +22,36 @@ function getComputerChoice() {
 
     switch(comp) {
         case 0:
-            return ('Rock');
-            break;
+            return 'Rock';
         case 1:
-            return ('Scissors');
-            break;
+            return 'Scissors';
         case 2:
-            return ('Paper');
-            break;
-
-
+            return 'Paper';
 
     }
 }
 
 function playRound(humanChoice, computerChoice) {
+    if (!humanChoice) {
+        console.log('Now you see that\'s\ wrong stupid. Start over.');
+        return;
+    }
     
-    let shoot = humanChoice && computerChoice; 
-    let lose1 = humanChoice == 'Rock' && computerChoice == 'Paper';
-    let win1 = humanChoice == 'Rock' && computerChoice == 'Scissors';
-    let draw1 = humanChoice == 'Rock' && computerChoice == 'Rock';
-    let lose2 =  humanChoice == 'Paper' && computerChoice == 'Scissors';
-    let win2 = humanChoice == 'Paper' && computerChoice == 'Rock';
-    let draw2 = humanChoice == 'Paper' && computerChoice == 'Paper';
-    let lose3 = humanChoice == 'Scissors' && computerChoice == 'Rock';
-    let win3 = humanChoice == 'Scissors' && computerChoice == 'Paper';
-    let draw3 = humanChoice == 'Scissors' && computerChoice == 'Scissors';
-     
-    switch (shoot) {
-        case lose1:
-            return console.log('You lose. Paper beats Rock.');
-            break;
-        case lose2:
-            return console.log('You lose. Scissor beats Paper.');
-            break;
-        case lose3:
-            return console.log('You lose. Rock beats Scissors.');
-            break;
-        case win1:
-            return console.log('You win. Rock beats Scissors.');
-            break;
-        case win2:
-            return console.log('You win. Paper beats Rock');
-            break;
-        case win3:
-            return console.log('You win. Scissors beats Paper');
-        case draw1:
-        case draw2:
-        case draw3:
-            return console.log('Draw. Try again.');
-            break;
-    } 
-} 
+    if (humanChoice === computerChoice) {
+        console.log('Draw. You might be a clanker so I need you to try again.');
+        return;
+    }
+
+    if (
+        (humanChoice === 'Rock' && computerChoice === 'Scissors') ||
+        (humanChoice === 'Paper ' && computerChoice === 'Rock') ||
+        (humanChoice === 'Scissors' && computerChoice === 'Paper') 
+    ) {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+    } else {
+        console.log(`You lose. ${computerChoice} beats ${humanChoice}`)
+    }
+}
 
 let playerOption = getHumanChoice();
 let computerOption = getComputerChoice();
