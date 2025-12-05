@@ -31,6 +31,10 @@ function getComputerChoice() {
     }
 }
 
+let playerOption = getHumanChoice();
+let computerOption = getComputerChoice();
+
+
 function playRound(humanChoice, computerChoice) {
     if (!humanChoice) {
         console.log('Now you see that\'s\ wrong stupid. Start over.');
@@ -42,9 +46,10 @@ function playRound(humanChoice, computerChoice) {
         return;
     }
 
+
     if (
         (humanChoice === 'Rock' && computerChoice === 'Scissors') ||
-        (humanChoice === 'Paper ' && computerChoice === 'Rock') ||
+        (humanChoice === 'Paper' && computerChoice === 'Rock') ||
         (humanChoice === 'Scissors' && computerChoice === 'Paper') 
     ) {
         console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
@@ -53,5 +58,8 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-let playerOption = getHumanChoice();
-let computerOption = getComputerChoice();
+playRound(playerOption, computerOption);
+
+
+
+
