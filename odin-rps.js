@@ -3,6 +3,10 @@
 function getHumanChoice() {
     let hI = prompt('Jan!Ken!Pon!','');
 
+    if (hI === null) {
+        return undefined;
+    }
+
     let huIN = hI.toLowerCase();
 
     if(huIN === 'rock') {
@@ -31,8 +35,6 @@ function getComputerChoice() {
     }
 }
 
-let playerOption = getHumanChoice();
-let computerOption = getComputerChoice();
 
 
 function playRound(humanChoice, computerChoice) {
@@ -58,7 +60,7 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-playRound(playerOption, computerOption);
+
 
 
 
