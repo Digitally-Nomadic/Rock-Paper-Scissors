@@ -1,5 +1,18 @@
 'use strict'
 
+let playerOption = getHumanChoice();
+let computerOption = getComputerChoice();
+let playerScore = 0;
+let computerScore = 0;
+
+let match = playRound(playerOption, computerOption);
+
+if (match = playerOption) {
+    ++playerScore
+} else if (match = computerOption) {
+    ++computerScore
+}
+
 function getHumanChoice() {
     let hI = prompt('Jan!Ken!Pon!','');
 
@@ -54,11 +67,16 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === 'Paper' && computerChoice === 'Rock') ||
         (humanChoice === 'Scissors' && computerChoice === 'Paper') 
     ) {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        return humanChoice;
     } else {
-        console.log(`You lose. ${computerChoice} beats ${humanChoice}`)
+        console.log(`You lose. ${computerChoice} beats ${humanChoice}`);
+        return computerChoice;
     }
 }
+
+
+
 
 
 
