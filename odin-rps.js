@@ -1,18 +1,5 @@
 'use strict'
 
-let playerOption = getHumanChoice();
-let computerOption = getComputerChoice();
-let playerScore = 0;
-let computerScore = 0;
-
-let match = playRound(playerOption, computerOption);
-
-if (match = playerOption) {
-    ++playerScore
-} else if (match = computerOption) {
-    ++computerScore
-}
-
 function getHumanChoice() {
     let hI = prompt('Jan!Ken!Pon!','');
 
@@ -35,14 +22,14 @@ function getHumanChoice() {
 }
 
 function getComputerChoice() {
-    let comp = Math.floor(Math.random() * 3);
+    let comp = Math.floor(Math.random() * 3) + 1;
 
     switch(comp) {
-        case 0:
-            return 'Rock';
         case 1:
-            return 'Scissors';
+            return 'Rock';
         case 2:
+            return 'Scissors';
+        case 3:
             return 'Paper';
 
     }
@@ -74,6 +61,37 @@ function playRound(humanChoice, computerChoice) {
         return computerChoice;
     }
 }
+
+function playGame() {
+    let rdCount = 0;
+    let playerScore = 0;
+    let computerScore = 0;
+
+    console.log('Game Start!');
+
+    while (rdCount < 5) {
+        let playerOption = getHumanChoice();
+        let computerOption = getComputerChoice();
+
+        let result = playRound(playerOption, computerOption);
+
+        if (result === playerOption) {
+            playerScore++;
+            rdCount++;
+        } else if (result === computerOption) {
+            computerScore++;
+            rdCount++;
+        }
+    }
+
+    console.log('GAME OVER');
+    if (playerScore > computerScore) {
+        console.log('You Win!');
+    } else {
+        console.log('You lose!')
+    }
+}
+
 
 
 
