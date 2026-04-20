@@ -1,23 +1,16 @@
 'use strict'
 
-function getHumanChoice() {
-    let hI = prompt('Jan!Ken!Pon!','');
 
-    if (hI === null) {
-        return undefined;
-    }
+let bttn = document.querySelectorAll('.jkp');
+bttn.addEventListener('click', playRound)
 
-    let huIN = hI.toLowerCase();
-
-    if(huIN === 'rock') {
+function getHumanChoice(bttn) {
+    if (bttn.id === 'rock') {
         return 'Rock';
-    } else if (huIN === 'paper') {
-        return 'Paper';
-    } else if (huIN === 'scissors') {
-        return 'Scissors';
-    } else {
-        console.log('Going to need a Rock, Paper, or Scissors big dog.')
-        return undefined;
+    } else if (bttn.id === 'paper') {
+        return 'Paper'
+    } else if (bttn.id === 'scissors') {
+        return 'Scissors'
     }
 }
 
@@ -69,7 +62,7 @@ function playGame() {
 
     console.log('Game Start!');
 
-    while (rdCount < 5) {
+   while(rdCount > 5){
         let playerOption = getHumanChoice();
         let computerOption = getComputerChoice();
 
