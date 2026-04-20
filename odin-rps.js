@@ -1,87 +1,73 @@
 'use strict'
 
 
-let bttn = document.querySelectorAll('.jkp');
-bttn.addEventListener('click', playRound);
-
+let buttons = document.querySelectorAll('.jkp');
 let judgement = document.querySelector('.announcer');
-let hmnCount = document.querySelector('.player');
-let cpuCount = document.querySelector('.cpu');
+let hmnCount = document.querySelector('#player2');
+let cpuCount = document.querySelector('#cpu2');
 
+let playerScore = 0;
+let computerScore = 0;
 
-function getHumanChoice(bttn) {
-    if (bttn.id === 'rock') {
-        return 'Rock';
-    } else if (bttn.id === 'paper') {
-        return 'Paper'
-    } else if (bttn.id === 'scissors') {
-        return 'Scissors'
-    }
+buttons.forEach((button) => {
+ button.addEventListener('click', () => {
+    if (playerScore >= 5 || computerScore >= 5) return;
+
+    let playerSelection = button.id;
+    let computerSelection = getComputerChoice();
+
+    playRound(playerSelection, computerSelection);
+   })   
+})
+
+function getComputerChoice(){
+    let choices = ['rock', 'paper', 'scissors'];
+    let randIndex = Math.floor(Math.random() * 3);
+    return choices[randIndex];
 }
-
-function getComputerChoice() {
-    let comp = Math.floor(Math.random() * 3) + 1;
-
-    switch(comp) {
-        case 1:
-            return 'Rock';
-        case 2:
-            return 'Scissors';
-        case 3:
-            return 'Paper';
-
-    }
-}
-
-
 
 function playRound(humanChoice, computerChoice) {
-    
-    if (humanChoice === computerChoice) {
-        judgement.textContent('Draw. Replay round');
-        return;
-    }
+    let human = humanChoice.tolowerCase();
+    let computer = computerChoice.toLowerCase();
 
-    if (
-        (humanChoice === 'Rock' && computerChoice === 'Scissors') ||
-        (humanChoice === 'Paper' && computerChoice === 'Rock') ||
-        (humanChoice === 'Scissors' && computerChoice === 'Paper') 
-    ) {
-        judgement.textContent(`You win! ${humanChoice} beats ${computerChoice}.`);
-        return humanChoice;
+    if (human === computer) {
+        judgement.textContent = `It's a draw! Both chose ${human}.`;
+    } else if (
+        (human === 'rock' && computer === 'scissors') || 
+        (human === 'paper' && computer === 'rock') ||
+        (human === 'scissors' && computer === 'paper')
+    ){
+        playerScore++;
+        judgement.textContent = `You win this round! ${human} beats ${computer}.`;
     } else {
-        judgement.textContent(`You lose. ${computerChoice} beats ${humanChoice}`);
-        return computerChoice;
+        computerScore++;
+        judgement.textContent = `You lose this round! ${human} beats ${computer}.`;
+    }
+
+    updateScoreboard();
+    checkWinner();
+}
+
+function updateScoreboard() {
+    hmnScoreDisplay.textContent = playerScore;
+    cpuScoreDisplay.textContent = computerScore;
+}
+
+function checkWinner() {
+    if (playerScore === 5) {
+        judgement.textContent = 'GAME OVER: A champion has been crowned!';
+        disableButtons();
+    } else if (computerScore === 5) {
+        judgement.textContent = 'GAME OVER: CPU takes the house.';
+        disableButtons();
     }
 }
 
-function playGame() {
-    let playerScore = 0;
-    let computerScore = 0;
-
-    judgement.textContent('Game Start!');
-
-   while( playerScore || computerScore > 5){
-        let playerOption = getHumanChoice();
-        let computerOption = getComputerChoice();
-
-        let result = playRound(playerOption, computerOption);
-
-        if (result === playerOption) {
-            playerScore+= ;
-
-        } else if (result === computerOption) {
-            computerScore+= ;
-        }
-    }
-
-    judgement.textContent('GAME OVER');
-    if (playerScore = 5) {
-        judgement.textContent('You Win!');
-    } else if (computerScore = 5) {
-        judgement.textContent('You lose!')
-    }
+function disableButtons() {
+    buttons.forEach(btn => btn.disabled = true);
 }
+
+
 
 
 
