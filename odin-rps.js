@@ -2,7 +2,12 @@
 
 
 let bttn = document.querySelectorAll('.jkp');
-bttn.addEventListener('click', playRound)
+bttn.addEventListener('click', playRound);
+
+let judgement = document.querySelector('.announcer');
+let hmnCount = document.querySelector('.player');
+let cpuCount = document.querySelector('.cpu');
+
 
 function getHumanChoice(bttn) {
     if (bttn.id === 'rock') {
@@ -31,57 +36,50 @@ function getComputerChoice() {
 
 
 function playRound(humanChoice, computerChoice) {
-    if (!humanChoice) {
-        console.log('Now you see that\'s\ wrong stupid. Start over.');
-        return;
-    }
     
     if (humanChoice === computerChoice) {
-        console.log('Draw. You might be a clanker so I need you to try again.');
+        judgement.textContent('Draw. Replay round');
         return;
     }
-
 
     if (
         (humanChoice === 'Rock' && computerChoice === 'Scissors') ||
         (humanChoice === 'Paper' && computerChoice === 'Rock') ||
         (humanChoice === 'Scissors' && computerChoice === 'Paper') 
     ) {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        judgement.textContent(`You win! ${humanChoice} beats ${computerChoice}.`);
         return humanChoice;
     } else {
-        console.log(`You lose. ${computerChoice} beats ${humanChoice}`);
+        judgement.textContent(`You lose. ${computerChoice} beats ${humanChoice}`);
         return computerChoice;
     }
 }
 
 function playGame() {
-    let rdCount = 0;
     let playerScore = 0;
     let computerScore = 0;
 
-    console.log('Game Start!');
+    judgement.textContent('Game Start!');
 
-   while(rdCount > 5){
+   while( playerScore || computerScore > 5){
         let playerOption = getHumanChoice();
         let computerOption = getComputerChoice();
 
         let result = playRound(playerOption, computerOption);
 
         if (result === playerOption) {
-            playerScore++;
-            rdCount++;
+            playerScore+= ;
+
         } else if (result === computerOption) {
-            computerScore++;
-            rdCount++;
+            computerScore+= ;
         }
     }
 
-    console.log('GAME OVER');
-    if (playerScore > computerScore) {
-        console.log('You Win!');
-    } else {
-        console.log('You lose!')
+    judgement.textContent('GAME OVER');
+    if (playerScore = 5) {
+        judgement.textContent('You Win!');
+    } else if (computerScore = 5) {
+        judgement.textContent('You lose!')
     }
 }
 
