@@ -26,8 +26,9 @@ function getComputerChoice(){
     return choices[randIndex];
 }
 
-function playRound(humanChoice, computerChoice) {
-    let human = humanChoice.tolowerCase();
+function playRound(playerChoice, computerChoice) {
+
+    let human = playerChoice.toLowerCase();
     let computer = computerChoice.toLowerCase();
 
     if (human === computer) {
@@ -41,7 +42,7 @@ function playRound(humanChoice, computerChoice) {
         judgement.textContent = `You win this round! ${human} beats ${computer}.`;
     } else {
         computerScore++;
-        judgement.textContent = `You lose this round! ${human} beats ${computer}.`;
+        judgement.textContent = `You lose this round! ${computer} beats ${human}.`;
     }
 
     updateScoreboard();
@@ -49,8 +50,8 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function updateScoreboard() {
-    hmnScoreDisplay.textContent = playerScore;
-    cpuScoreDisplay.textContent = computerScore;
+    hmnCount.textContent = playerScore;
+    cpuCount.textContent = computerScore;
 }
 
 function checkWinner() {
