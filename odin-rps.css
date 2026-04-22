@@ -20,5 +20,11 @@
 .zeta{
     display:flex;
     flex-direction:column;
+    justify-content:space-between;
     padding:10px;
+
+}
+
+#options{
+    gap:8px;
 }
